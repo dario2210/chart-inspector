@@ -7,7 +7,7 @@ from typing import Any
 import pandas as pd
 
 
-DATA_EXTENSIONS = {".csv", ".parquet"}
+DATA_EXTENSIONS = {".csv"}
 RESULT_EXTENSIONS = {".json"}
 
 
@@ -55,8 +55,6 @@ def parse_time_series(series: pd.Series) -> pd.Series:
 def load_candles(path: Path) -> pd.DataFrame:
     if path.suffix.lower() == ".csv":
         return normalize_ohlcv_columns(pd.read_csv(path))
-    if path.suffix.lower() == ".parquet":
-        return normalize_ohlcv_columns(pd.read_parquet(path))
     raise ValueError(f"Unsupported data file: {path.name}")
 
 

@@ -9,7 +9,7 @@ analysis file.
 
 ## MVP features
 
-- Load candle files from `data/` (`.csv` or `.parquet`).
+- Load candle files from `data/` (`.csv` in the MVP).
 - Optionally load a simulation result file from `results/` (`.json`).
 - Use indicator parameters from the result file when present.
 - Recalculate WaveTrend with editable parameters.
@@ -60,6 +60,9 @@ price and full row snapshot, including indicator values.
 
 This creates a reusable manual dataset that can later be compared with BEE4,
 BEE5 or any other strategy.
+
+Parquet support can be added later by installing `pyarrow`, but the first
+container is intentionally CSV-first to keep deployment small and fast.
 
 ## Project context
 
