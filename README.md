@@ -60,3 +60,8 @@ price and full row snapshot, including indicator values.
 
 This creates a reusable manual dataset that can later be compared with BEE4,
 BEE5 or any other strategy.
+
+## Project context
+
+See `PROJECT_CONTEXT.md` for the handoff from the original BEE4 discussion and
+the recommended prompt for starting a separate Chart Inspector chat.
