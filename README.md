@@ -18,6 +18,16 @@ analysis file.
 - Click the chart to select a candle and save a labeled annotation.
 - Save annotations to `annotations/` as JSON and CSV.
 
+## Supported result JSON
+
+`Result file` is an optional `.json` exported by a bot or simulation.
+
+Supported structures:
+
+- direct result payload with keys such as `symbol`, `tf`, `params_used`,
+  `trades`,
+- saved BEE wrapper with `schema`, `saved_at`, `meta` and nested `result`.
+
 ## Expected candle columns
 
 At minimum:

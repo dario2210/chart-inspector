@@ -63,7 +63,25 @@ def load_result(path: Path | None) -> dict[str, Any]:
         return {}
     with path.open("r", encoding="utf-8") as f:
         data = json.load(f)
-    return data if isinstance(data, dict) else {}
+    if not isinstance(data, dict):
+        return {}
+
+    # Saved BEE runs use a wrapper:
+    # {"schema": "...", "saved_at": "...", "meta": {...}, "result": {...}}
+    # The inspector works with the actual result payload, but keeps wrapper
+    # metadata so annotations can still reference the source run.
+    if isinstance(data.get("result"), dict):
+        result = dict(data["result"])
+        meta = data.get("meta") if isinstance(data.get("meta"), dict) else {}
+        for key in ["mode", "symbol", "tf", "timeframe", "capital", "stats"]:
+            if key not in result and key in meta:
+                result[key] = meta[key]
+        result["_source_schema"] = data.get("schema")
+        result["_saved_at"] = data.get("saved_at")
+        result["_saved_meta"] = meta
+        return result
+
+    return data
 
 
 def extract_params(result: dict[str, Any]) -> dict[str, Any]:
